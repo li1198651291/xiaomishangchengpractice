@@ -1,19 +1,65 @@
 import navData from './data/nav-data.js';
 import categoryData from './data/category-data.js';
 import flashData from "./data/flashsale-data.js";
-import {  phoneData, hotData, movieData, intellHotData, afData, cxData } from './data/promo-data.js';
-
+import shoppingcarData from "./data/shoppingcar-data.js";
+import { phoneData, hotData, movieData, intellHotData, afData, cxData } from './data/promo-data.js';
+//购物车
+var carMenu = document.getElementsByClassName('car-menu')[0];
+var carIcon = document.getElementsByClassName('car-icon')[0];
+var carNum = document.getElementsByClassName('car-num')[0];
+if (shoppingcarData.length !== 0) {
+  var ul = document.createElement('ul');
+  shoppingcarData.forEach(function (item) {
+    var li = document.createElement('li');
+    li.innerHTML = `
+      <div class="car-item clearfix">
+        <a href="#" class="thumb">
+          <img src=${item.url} width="60" height="60">
+          <p href="#" class="title">${item.title}</p>
+        </a>
+        <span class="price">${item.price} * 1</span>
+        <a class="btn-del iconfont icon-cha">
+        </a>
+      </div>  
+    `
+    ul.appendChild(li);
+  })
+  carMenu.innerHTML = '';
+  carMenu.appendChild(ul);
+  var ulSize = ul.getBoundingClientRect();
+  console.log(ulSize.height)
+  if(ulSize.height > 400) {
+    ul.style.height = '400px'
+    ul.style.overflowY = 'auto'
+  }
+  var div = document.createElement('div');
+  var totalPrice = 0
+  shoppingcarData.forEach(function(item) {
+    totalPrice = totalPrice + item.priceNew
+  })
+  div.className = 'car-total clearfix';
+  div.innerHTML = `
+    <span class="total">
+      共 ${shoppingcarData.length} 件商品
+      <span class="total-price"><em>${totalPrice}</em>元</span>  
+    </span>
+    <a class="btn-primary" href="#">去购物车结算</a>
+  `
+  carMenu.appendChild(div)
+  carNum.innerHTML = shoppingcarData.length;
+  carIcon.className = 'iconfont icon-gouwucheman car-icon';
+}
 //搜索栏
 var search = document.getElementById('search');
 var hotWord = document.getElementsByClassName('search-hot-word')[0];
 var searchBtn = document.querySelector('.search-btn');
-search.addEventListener('focus',function(e) {
+search.addEventListener('focus', function (e) {
   hotWord.style.visibility = 'hidden';
   this.style.borderColor = '#ff6700';
   searchBtn.style.borderColor = '#ff6700';
 })
-search.addEventListener('blur',function(e) {
-  if(!e.target.value) {
+search.addEventListener('blur', function (e) {
+  if (!e.target.value) {
     hotWord.style.visibility = 'visible';
     this.style.borderColor = '#e0e0e0';
     searchBtn.style.borderColor = '#e0e0e0';
@@ -22,17 +68,17 @@ search.addEventListener('blur',function(e) {
 //轮播
 var slideShow = document.getElementsByClassName('slideshow');
 var bullet = document.getElementsByClassName('pagination-bullet');
-var slidetimer = setInterval(function() {
+var slidetimer = setInterval(function () {
   slideNext()
-},3000)
+}, 3000)
 function slideNext() {
   var nextIndex = 0;
   for (let i = 0; i < slideShow.length; i++) {
-    if(slideShow[i].classList.contains('opacity')) {
+    if (slideShow[i].classList.contains('opacity')) {
       slideShow[i].classList.remove('opacity');
       bullet[i].classList.remove('active');
       nextIndex = i + 1;
-      if(nextIndex === 5) {
+      if (nextIndex === 5) {
         nextIndex = 0
       }
       slideShow[nextIndex].classList.add('opacity');
@@ -44,11 +90,11 @@ function slideNext() {
 function slidePre() {
   var preIndex = 0;
   for (let i = 0; i < slideShow.length; i++) {
-    if(slideShow[i].classList.contains('opacity')) {
+    if (slideShow[i].classList.contains('opacity')) {
       slideShow[i].classList.remove('opacity');
       bullet[i].classList.remove('active');
       preIndex = i - 1;
-      if(preIndex === -1) {
+      if (preIndex === -1) {
         preIndex = 4
       }
       slideShow[preIndex].classList.add('opacity');
@@ -59,11 +105,11 @@ function slidePre() {
 }
 var pagination = document.getElementsByClassName('pagination')[0];
 
-pagination.onclick = function(e) {
-  if(e.target.tagName === 'A') {
+pagination.onclick = function (e) {
+  if (e.target.tagName === 'A') {
     for (let i = 0; i < bullet.length; i++) {
       console.log(i)
-      if(bullet[i] === e.target) {
+      if (bullet[i] === e.target) {
         var active = document.getElementsByClassName('active')[0];
         var opacity = document.getElementsByClassName('opacity')[0];
         opacity.classList.remove('opacity');
@@ -78,25 +124,25 @@ pagination.onclick = function(e) {
 }
 var preBtn = document.getElementsByClassName('preBtn')[0];
 var nextBtn = document.getElementsByClassName('nextBtn')[0];
-preBtn.onclick = function() {
+preBtn.onclick = function () {
   slidePre();
 }
-nextBtn.onclick = function() {
+nextBtn.onclick = function () {
   slideNext();
 }
 var slideshowWrapper = document.getElementsByClassName('slideshow-wrapper')[0];
-slideshowWrapper.onmouseover = function() {
+slideshowWrapper.onmouseover = function () {
   clearInterval(slidetimer)
 }
-slideshowWrapper.onmouseleave = function() {
-  slidetimer = setInterval(function() {
+slideshowWrapper.onmouseleave = function () {
+  slidetimer = setInterval(function () {
     slideNext()
-  },3000)
+  }, 3000)
 }
 //导航栏
 
 var navItem = document.getElementsByClassName('nav-item');
-               
+
 function createNavChild(obj) {
   var itemChild = document.createElement('div');
   itemChild.innerHTML = `<ul class="child-list">
@@ -107,7 +153,7 @@ function createNavChild(obj) {
                         <li><a href="#"><div class="figure"><img src=${obj.image[4]} alt="" width="160px" height="110px"></div><div class="title">${obj.name[4]}</div><p class="price">${obj.price[4]}</p></a></li>
                         <li><a href="#"><div class="figure"><img src=${obj.image[5]} alt="" width="160px" height="110px"></div><div class="title">${obj.name[5]}</div><p class="price">${obj.price[5]}</p></a></li>
                       </ul>`;
-  itemChild.className = 'item-child';  
+  itemChild.className = 'item-child';
   return itemChild;
 }
 
@@ -118,6 +164,7 @@ navItem[3].appendChild(createNavChild(navData.笔记本));
 navItem[4].appendChild(createNavChild(navData.家电));
 navItem[5].appendChild(createNavChild(navData.路由器));
 navItem[6].appendChild(createNavChild(navData.智能硬件));
+
 
 //生成左侧选项卡结构
 {/* <div class="children">
@@ -176,11 +223,11 @@ var swiperNext = document.getElementsByClassName('swiper-next')[0];
 swiperItem[0].className += ' swiper-active-item';
 
 function moveNext() {
-  var swiperWrapper= document.getElementsByClassName('swiper-wrapper')[0];
+  var swiperWrapper = document.getElementsByClassName('swiper-wrapper')[0];
   var swiperActiveItem = document.querySelector('.swiper-active-item');
   var index = parseInt(swiperActiveItem.classList) + 4;
   swiperPre.classList.remove('disable');
-  if(index >= flashData.length - 1 - (flashData.length - 1) % 4) {
+  if (index >= flashData.length - 1 - (flashData.length - 1) % 4) {
     index = flashData.length - 1 - (flashData.length - 1) % 4;
     swiperNext.className += ' disable';
   }
@@ -190,11 +237,11 @@ function moveNext() {
   swiperWrapper.style.transform = `translateX(${moveDis}px)`;
 }
 function movePre() {
-  var swiperWrapper= document.getElementsByClassName('swiper-wrapper')[0];
+  var swiperWrapper = document.getElementsByClassName('swiper-wrapper')[0];
   var swiperActiveItem = document.querySelector('.swiper-active-item');
   var index = parseInt(swiperActiveItem.classList) - 4;
   swiperNext.classList.remove('disable')
-  if(index <= 0) {
+  if (index <= 0) {
     index = 0;
     swiperPre.className += ' disable';
   }
@@ -203,50 +250,50 @@ function movePre() {
   var moveDis = -(parseInt(swiperItem[index].style.left) - 14);
   swiperWrapper.style.transform = `translateX(${moveDis}px)`;
 }
-swiperNext.onclick = function() {
-  if(!swiperNext.classList.contains('disable')) {
+swiperNext.onclick = function () {
+  if (!swiperNext.classList.contains('disable')) {
     moveNext()
   }
 }
-swiperPre.onclick = function() {
-  if(!swiperPre.classList.contains('disable')) {
+swiperPre.onclick = function () {
+  if (!swiperPre.classList.contains('disable')) {
     movePre()
-  } 
+  }
 }
 var direction = 'right';
-var swiperTimer = setInterval(function() {
-  if(direction === 'right') {
-    if(swiperNext.classList.contains('disable')) {
+var swiperTimer = setInterval(function () {
+  if (direction === 'right') {
+    if (swiperNext.classList.contains('disable')) {
       direction = 'left';
       movePre()
       return;
     }
-    moveNext() 
+    moveNext()
   } else {
-    if(swiperPre.classList.contains('disable')) {
+    if (swiperPre.classList.contains('disable')) {
       direction = 'right';
-      moveNext() 
+      moveNext()
       return
     }
     movePre()
   }
 }, 4000)
-flashsaleList.onmouseover = function() {
+flashsaleList.onmouseover = function () {
   clearInterval(swiperTimer);
 }
-flashsaleList.onmouseleave = function() {
-  swiperTimer = setInterval(function() {
-    if(direction === 'right') {
-      if(swiperNext.classList.contains('disable')) {
+flashsaleList.onmouseleave = function () {
+  swiperTimer = setInterval(function () {
+    if (direction === 'right') {
+      if (swiperNext.classList.contains('disable')) {
         direction = 'left';
         movePre()
         return;
       }
-      moveNext() 
+      moveNext()
     } else {
-      if(swiperPre.classList.contains('disable')) {
+      if (swiperPre.classList.contains('disable')) {
         direction = 'right';
-        moveNext() 
+        moveNext()
         return
       }
       movePre()
@@ -283,7 +330,7 @@ class Promo {
       fragment.appendChild(brickItem);
     }
     var containerS = document.createElement('div');
-    if(this.minerData) {
+    if (this.minerData) {
       var brickItemS = document.createElement('div');
       brickItemS.className = `brick-item brick-item-s`;
       brickItemS.innerHTML = `<a href="#">
@@ -293,9 +340,9 @@ class Promo {
                                 <h3 class="title">${this.minerData.title}</h3>
                                 <p class="price">${this.minerData.price}</p>
                               </a>`
-      containerS.appendChild(brickItemS);                        
+      containerS.appendChild(brickItemS);
     }
-    if(this.title) {
+    if (this.title) {
       var moreItem = document.createElement('div');
       moreItem.className = `brick-item brick-item-s`;
       moreItem.innerHTML = `<a href="#">
@@ -304,7 +351,7 @@ class Promo {
                                 </div>
                                 <div class="more">浏览更多<span>${this.title}</span></div>
                               </a>`
-      containerS.appendChild(moreItem);        
+      containerS.appendChild(moreItem);
     }
     fragment.appendChild(containerS);
     this.container.appendChild(fragment);
@@ -333,8 +380,8 @@ function toggle(list, item) {
   var item = document.getElementById(item);
 
   for (let i = 0; i < promoBtnParent.children.length; i++) {
-    promoBtnParent.children[i].onmouseover = function() {
-      if(this.className === 'tab-active') {
+    promoBtnParent.children[i].onmouseover = function () {
+      if (this.className === 'tab-active') {
       } else {
         var activeItem = promoBtnParent.getElementsByClassName('tab-active');
         var show = item.getElementsByClassName('show');

@@ -4,17 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <!-- <meta name="keywords" content="小米,redmi,小米10,Redmi K30,小米MIX Alpha,小米商城"> -->
+  <!-- <meta name="description" content="小米官网直营小米公司旗下所有产品，包括小米手机系列小米10 Pro 、小米9、小米MIX Alpha，Redmi 红米系列Redmi K30、Redmi Note 8 Pro，小米电视、笔记本、米家智能家居等，同时提供小米客户服务及售后支持." /> -->
+  <title>小米商城-练习</title>
+  <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="iconfont.css">
+  <link rel="shortcut icon" href="./image//icons/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
   <header>
+    <!--头部区域-->
+    <!-- 告示栏 -->
     <div class="notification">
       <a href="#"></a>
     </div>
     <!-- nav用法？？ -->
-    <nav class="site-topbar"> 
+    <!-- 顶部导航栏 -->
+    <nav class="site-topbar">
       <div class="topbar-container clearfix">
         <div class="topbar-left">
           <a href="#">小米商城</a>
@@ -37,26 +45,59 @@
           <span class="sep">|</span>
           <a href="#">协议规则</a>
           <span class="sep">|</span>
-          <a href="#">下载app</a>
+          <a href="#" class="download">
+            下载app
+            <div class="sanjiao"></div>
+            <div class="download-box">
+              <img src="./image/download.png" alt="" width="90" height="90">
+              小米商城APP
+            </div>
+          </a>
           <span class="sep">|</span>
           <a href="#">SelectLocation</a>
         </div>
-        <div class="shoppingCar">
-          <a href="#" class="car-mini">购物车</a>
-          <div class="car-menu"></div>
-        </div>
-        <div class="topbar-right">
-          <a href="#">登录</a>
-          <span class="sep">|</span>
-          <a href="#">注册</a>
-          <span class="sep">|</span>
-          <a href="#">消息通知</a>
+        <div class="topbar-right clearfix">
+          <div class="shoppingCar">
+            <a href="#" class="car-tit">
+              <i class="iconfont icon-gouwuchekong car-icon"></i>
+              购物车(<span class="car-num">0</span>)
+            </a>
+            <div class="car-menu">购物车中还没有商品，赶紧选购吧！</div>
+          </div>
+          <!-- <div class="login">
+            <a href="#">登录</a>
+            <span class="sep">|</span>
+            <a href="#">注册</a>
+            <span class="sep">|</span>
+            <a href="#">消息通知</a>
+          </div> -->
+          <div class="userinfo">
+            <div class="user">
+              <a href="#" class="user-name">
+                用户
+                <i class="iconfont icon-arrowBottom-fill"></i>
+              </a>
+              <ul class="user-list">
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">评价晒单</a></li>
+                <li><a href="#">我的喜欢</a></li>
+                <li><a href="#">小米账号</a></li>
+                <li><a href="#">退出登录</a></li>
+              </ul>
+            </div>
+            <span class="sep">|</span>
+            <a href="#">消息通知</a>
+            <span class="sep">|</span>
+            <a href="#">我的订单</a>
+          </div>
         </div>
       </div>
     </nav>
+    <!-- 次级导航栏 -->
     <nav class="site-header">
       <div class="header-container">
         <div class="header-logo">
+          <h1>小米商城</h1>
           <div class="logo-container">
             <a href="#">
               <span class="home"></span>
@@ -66,13 +107,14 @@
         </div>
         <div class="header-nav">
           <ul class="nav-list">
-            <li class="nav-category">
+            <li class="nav-category nav-item-none">
               <a class="link link-category" href="">全部商品分类</a>
               <div class="category">
                 <ul class="category-list">
                   <li class="category-item"><a class="category-title" href="#">手机 电话卡<em class="arrow"></em></a></li>
                   <li class="category-item"><a class="category-title" href="#">电视 盒子<em class="arrow"></em></a></li>
-                  <li class="category-item"><a class="category-title" href="#">笔记本 显示器 平板<em class="arrow"></em></a></li>
+                  <li class="category-item"><a class="category-title" href="#">笔记本 显示器 平板<em class="arrow"></em></a>
+                  </li>
                   <li class="category-item"><a class="category-title" href="#">家电 插线板<em class="arrow"></em></a></li>
                   <li class="category-item"><a class="category-title" href="#">出行 穿戴<em class="arrow"></em></a></li>
                   <li class="category-item"><a class="category-title" href="#">智能 路由器<em class="arrow"></em></a></li>
@@ -104,8 +146,8 @@
             <li class="nav-item">
               <a class="link" href="#">智能硬件</a>
             </li>
-            <li><a class="link" href="#">服务</a></li>
-            <li><a class="link" href="#">社区</a></li>
+            <li class="nav-item-none"><a class="link" href="#">服务</a></li>
+            <li class="nav-item-none"><a class="link" href="#">社区</a></li>
           </ul>
         </div>
         <div class="header-search">
@@ -113,8 +155,8 @@
             <input type="search" id="search" name="keyword">
             <input type="submit" value="" class="search-btn">
             <div class="search-hot-word">
-              <a class="hot-word-item"href="#">小米10</a>
-              <a class="hot-word-item"href="#">Redmi Note 8</a>
+              <a class="hot-word-item" href="#">小米10</a>
+              <a class="hot-word-item" href="#">Redmi Note 8</a>
             </div>
           </form>
         </div>
@@ -125,11 +167,16 @@
     <div class="home-hero">
       <div class="slideshow-container">
         <div class="slideshow-wrapper">
-          <div class="slideshow opacity"><a href="#"><img src="./image/slideshow0.jpg" alt="" width="1226px"height="460px"></a></div>
-          <div class="slideshow"><a href="#"><img src="./image/slideshow1.jpg" alt="" width="1226px" height="460px"></a></div>
-          <div class="slideshow"><a href="#"><img src="./image/slideshow2.jpg" alt="" width="1226px" height="460px"></a></div>
-          <div class="slideshow"><a href="#"><img src="./image/slideshow3.jpg" alt="" width="1226px" height="460px"></a></div>
-          <div class="slideshow"><a href="#"><img src="./image/slideshow4.jpg" alt="" width="1226px" height="460px"></a></div>
+          <div class="slideshow opacity"><a href="#"><img src="./image/slideshow0.jpg" alt="" width="1226px"
+                height="460px"></a></div>
+          <div class="slideshow"><a href="#"><img src="./image/slideshow1.jpg" alt="" width="1226px" height="460px"></a>
+          </div>
+          <div class="slideshow"><a href="#"><img src="./image/slideshow2.jpg" alt="" width="1226px" height="460px"></a>
+          </div>
+          <div class="slideshow"><a href="#"><img src="./image/slideshow3.jpg" alt="" width="1226px" height="460px"></a>
+          </div>
+          <div class="slideshow"><a href="#"><img src="./image/slideshow4.jpg" alt="" width="1226px" height="460px"></a>
+          </div>
           <div class="slideBtn nextBtn"></div>
           <div class="slideBtn preBtn"></div>
           <div class="pagination">
@@ -143,17 +190,26 @@
       </div>
       <div class="home-hero-sub clearfix">
         <div class="home-channel-list">
-          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img" src="./image/小米秒杀.png" alt="" width="24" height="24"><span>小米秒杀</span></a></div>
-          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img" src="./image/企业团购.png" alt="" width="24" height="24"><span>企业团购</span></a></div>
-          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img" src="./image/F码.png" alt="" width="24" height="24"><span>F码通道</span></a></div>
-          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img" src="./image/米粉卡.png" alt="" width="24" height="24"><span>米粉卡</span></a></div>
-          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img" src="./image/以旧换新.png" alt="" width="24" height="24"><span>以旧换新</span></a></div>
-          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img" src="./image/话费充值.png" alt="" width="24" height="24"><span>话费充值</span></a></div>
+          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img"
+                src="./image/小米秒杀.png" alt="" width="24" height="24"><span>小米秒杀</span></a></div>
+          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img"
+                src="./image/企业团购.png" alt="" width="24" height="24"><span>企业团购</span></a></div>
+          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img"
+                src="./image/F码.png" alt="" width="24" height="24"><span>F码通道</span></a></div>
+          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img"
+                src="./image/米粉卡.png" alt="" width="24" height="24"><span>米粉卡</span></a></div>
+          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img"
+                src="./image/以旧换新.png" alt="" width="24" height="24"><span>以旧换新</span></a></div>
+          <div class="home-channel-item"><a class="home-channel-link" href="#"><img class="home-channel-img"
+                src="./image/话费充值.png" alt="" width="24" height="24"><span>话费充值</span></a></div>
         </div>
-        <ul  class="home-promo-list">
-          <li><a href=""><img src="./image/promo/7bc54a61b927dd8c54ddd39a0acf0254.jpg" alt="" width="316" height="170"></a></li>
-          <li><a href=""><img src="./image/promo/816a66edef10673b4768128b41804cae.jpg" alt="" width="316" height="170"></a></li>
-          <li><a href=""><img src="./image/promo/94c74e01afe50a86c3a87ff030b85781.jpg" alt="" width="316" height="170"></a></li>
+        <ul class="home-promo-list">
+          <li><a href=""><img src="./image/promo/7bc54a61b927dd8c54ddd39a0acf0254.jpg" alt="" width="316"
+                height="170"></a></li>
+          <li><a href=""><img src="./image/promo/816a66edef10673b4768128b41804cae.jpg" alt="" width="316"
+                height="170"></a></li>
+          <li><a href=""><img src="./image/promo/94c74e01afe50a86c3a87ff030b85781.jpg" alt="" width="316"
+                height="170"></a></li>
         </ul>
       </div>
     </div>
@@ -320,12 +376,28 @@
         </div>
         <div class="box-bd clearfix">
           <ul class="video-list">
-            <li class="video-item"><a href="#"><div class="figure"><img src="./image/video/拍大片.jpg" alt="" width="296" height="180"><span class="play"><img src="./image/三角右.png" alt=""></span></div><h3 class="title">小米10 8K手机拍大片</h3></a></li>
-            <li class="video-item"><a href="#"><div class="figure"><img src="./image/video/发布会.jpg" alt="" width="296" height="180"><span class="play"><img src="./image/三角右.png" alt=""></span></div><h3 class="title">小米10发布会</h3></a></li>
-            <li class="video-item"><a href="#"><div class="figure"><img src="./image/video/开箱.jpg" alt="" width="296" height="180"><span class="play"><img src="./image/三角右.png" alt=""></span></div><h3 class="title">小米MIX Alpha 开箱</h3></a></li>
-            <li class="video-item"><a href="#"><div class="figure"><img src="./image/video/5g新品.jpg" alt="" width="296" height="180"><span class="play"><img src="./image/三角右.png" alt=""></span></div><h3 class="title">小米5G新品手机发布会</h3></a></li>
+            <li class="video-item"><a href="#">
+                <div class="figure"><img src="./image/video/拍大片.jpg" alt="" width="296" height="180"><span
+                    class="play"><img src="./image/三角右.png" alt=""></span></div>
+                <h3 class="title">小米10 8K手机拍大片</h3>
+              </a></li>
+            <li class="video-item"><a href="#">
+                <div class="figure"><img src="./image/video/发布会.jpg" alt="" width="296" height="180"><span
+                    class="play"><img src="./image/三角右.png" alt=""></span></div>
+                <h3 class="title">小米10发布会</h3>
+              </a></li>
+            <li class="video-item"><a href="#">
+                <div class="figure"><img src="./image/video/开箱.jpg" alt="" width="296" height="180"><span
+                    class="play"><img src="./image/三角右.png" alt=""></span></div>
+                <h3 class="title">小米MIX Alpha 开箱</h3>
+              </a></li>
+            <li class="video-item"><a href="#">
+                <div class="figure"><img src="./image/video/5g新品.jpg" alt="" width="296" height="180"><span
+                    class="play"><img src="./image/三角右.png" alt=""></span></div>
+                <h3 class="title">小米5G新品手机发布会</h3>
+              </a></li>
           </ul>
-      </div>
+        </div>
   </main>
   <footer>
     <div class="site-footer">
@@ -424,7 +496,7 @@
           </p>
           <p>© mi.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2020]0276-042号<br>
             （京）网械平台备字（2018）第00005号 互联网药品信息服务资格证 (京)-非经营性-2014-0090 营业执照 医疗器械质量公告<br>
-            增值电信业务许可证 网络食品经营备案（京）【2018】WLSPJYBAHF-12  食品经营许可证<br>
+            增值电信业务许可证 网络食品经营备案（京）【2018】WLSPJYBAHF-12 食品经营许可证<br>
             违法和不良信息举报电话：185-0130-1238 知识产权侵权投诉 本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</p>
         </div>
         <div class="info-links">
