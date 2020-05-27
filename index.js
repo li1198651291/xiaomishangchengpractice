@@ -2,6 +2,7 @@ import navData from './data/nav-data.js';
 import categoryData from './data/category-data.js';
 import flashData from "./data/flashsale-data.js";
 import shoppingcarData from "./data/shoppingcar-data.js";
+import videoData from './data/video-data.js';
 import { phoneData, hotData, movieData, intellHotData, afData, cxData } from './data/promo-data.js';
 //购物车
 var carMenu = document.getElementsByClassName('car-menu')[0];
@@ -28,13 +29,13 @@ if (shoppingcarData.length !== 0) {
   carMenu.appendChild(ul);
   var ulSize = ul.getBoundingClientRect();
   console.log(ulSize.height)
-  if(ulSize.height > 400) {
+  if (ulSize.height > 400) {
     ul.style.height = '400px'
     ul.style.overflowY = 'auto'
   }
   var div = document.createElement('div');
   var totalPrice = 0
-  shoppingcarData.forEach(function(item) {
+  shoppingcarData.forEach(function (item) {
     totalPrice = totalPrice + item.priceNew
   })
   div.className = 'car-total clearfix';
@@ -216,10 +217,23 @@ function createFlashsaleItem(arr) {
   }
   return ul;
 }
-flashsaleList.appendChild(createFlashsaleItem(flashData))
+flashsaleList.appendChild(createFlashsaleItem(flashData));
+
 var swiperItem = document.getElementsByClassName('swiper-item');
 var swiperPre = document.getElementsByClassName('swiper-pre')[0];
 var swiperNext = document.getElementsByClassName('swiper-next')[0];
+
+function Color() {
+  this.r = Math.floor(Math.random() * 255);
+  this.g = Math.floor(Math.random() * 255);
+  this.b = Math.floor(Math.random() * 255);
+  this.color = 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',0.8)';
+}
+for (let i = 0; i < swiperItem.length; i++) {
+  var color = new Color()
+  swiperItem[i].style.borderTopColor = color.color;
+}
+
 swiperItem[0].className += ' swiper-active-item';
 
 function moveNext() {
@@ -300,6 +314,46 @@ flashsaleList.onmouseleave = function () {
     }
   }, 4000)
 }
+//闪购时间
+var hours = document.getElementById('hours');
+var minutes = document.getElementById('minutes');
+var seconds = document.getElementById('seconds');
+// function setTime(endTime) {
+//   var timeNew = new Date();
+//   var hoursNew = timeNew.getHours();
+//   var minutesNew = timeNew.getMinutes();
+//   var secondsNew = timeNew.getSeconds();
+//   hours.innerHTML = hoursNew.toString().length === 1 ? `0${hoursNew}` : hoursNew;
+//   minutes.innerHTML = minutesNew.toString().length === 1 ? `0${minutesNew}` : minutesNew;
+//   seconds.innerHTML = secondsNew.toString().length === 1 ? `0${secondsNew}` : secondsNew;
+//   requestAnimationFrame(setTime)
+// }
+// setTime()
+var endHour = 18;
+var endMinutes = 30;
+function setTime(endHour, endMinutes) {
+  var timeNew = new Date();
+  var hoursNew = timeNew.getHours();
+  var minutesNew = timeNew.getMinutes();
+  var secondsNew = timeNew.getSeconds();
+  var hoursAway = endHour - hoursNew;
+  var minutesAway = endMinutes - minutesNew - 1;
+  if (minutesAway === 60) {
+    minutesAway = 0
+  } else if (minutesAway < 0) {
+    minutesAway += 60;
+    hoursAway -= 1
+  }
+  var secondsAway = 60 - secondsNew;
+  if (secondsAway === 60) {
+    secondsAway = 0
+  }
+  hours.innerHTML = hoursAway.toString().length === 1 ? `0${hoursAway}` : hoursAway;
+  minutes.innerHTML = minutesAway.toString().length === 1 ? `0${minutesAway}` : minutesAway;
+  seconds.innerHTML = secondsAway.toString().length === 1 ? `0${secondsAway}` : secondsAway;
+  requestAnimationFrame(() => setTime(endHour, endMinutes))
+}
+setTime(endHour, endMinutes)
 //生成展览区域
 class Promo {
   constructor(id, data) {
@@ -398,3 +452,26 @@ function toggle(list, item) {
 toggle('appliances-list', 'appliances');
 toggle('intelligence-list', 'intelligence');
 toggle('rim-list', 'rim');
+
+//视频区域
+var closeBtn = document.getElementsByClassName('close-btn')[0];
+var videoPop = document.getElementsByClassName('video-pop')[0];
+var videoItem = document.getElementsByClassName('video-item');
+var videoTitle = document.getElementsByClassName('video-title')[0];
+var video = document.getElementById('video');
+
+closeBtn.addEventListener('click', function () {
+  videoPop.style.display = 'none';
+  video.src = '';
+  video.poster = '';
+})
+for (let i = 0; i < videoItem.length; i++) {
+  videoItem[i].addEventListener('click', function () {
+    videoPop.style.display = 'flex';
+    videoTitle.innerHTML = videoData[i].title;
+    video.src = videoData[i].src;
+    video.poster = videoData[i].url;
+    console.log(video.url)
+    console.log(video.poster)
+  })
+}
